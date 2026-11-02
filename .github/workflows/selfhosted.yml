@@ -1,1 +1,20 @@
+name: Self Hosted Runner
 
+on: push
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    steps:
+      - name: Display message
+        run: echo "Hello from EC2"
+
+      - name: Check machine
+        run: hostname
+
+      - name: Check OS
+        run: uname -a
+
+      - name: Check disk
+        run: df -h
