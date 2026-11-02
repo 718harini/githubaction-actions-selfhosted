@@ -1,23 +1,17 @@
-name: Self Hosted Runner
+name: CI Pipeline on Self-Hosted Runner
 
-on: push
+on:
+  workflow_dispatch:  # Manual trigger
 
 jobs:
-  test:
-    runs-on: self-hosted
-
+  build:
+    runs-on: [self-hosted, amazonlinux, dev]  # Matches labels of self-hosted runner
     steps:
-      - name: Display message
-        run: echo "Hello from EC2"
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Check machine
-        run: hostname
+      - name: Build
+        run: echo "Building on self-hosted runner"
 
-      - name: Check OS
-        run: uname -a
-
-      - name: Check disk
-        run: df -h
-      - name: Create file on EC2
-        run: echo "GitHub Actions executed this file on EC2" > /tmp/github-runner-test.txt
-
+      - name: Test
+        run: echo "Testing on self-hosted runner"
